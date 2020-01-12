@@ -1,6 +1,7 @@
 package pl.grabla.kryptomarket.controller
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import pl.grabla.kryptomarket.CryptoFacade
 import pl.grabla.kryptomarket.exceptions.UserNotFoundException
@@ -37,5 +38,18 @@ class CryptoController {
     fun sellBtc(@PathVariable id: Long, @RequestParam("amount") amount:Double): Wallet{
         return cryptoFacade.sellBtc(id, amount)
     }
+
+    @PostMapping("/user/{id}/buy/btc")
+    fun buyBtc(@PathVariable id: Long, @RequestParam("amount") amount:Double):Wallet{
+        return cryptoFacade.buyBtc(id, amount)
+    }
+
+    @DeleteMapping("/user/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun deleteUser(@PathVariable id: Long){
+        return cryptoFacade.deleteUser(id)
+    }
+
+
 
 }
